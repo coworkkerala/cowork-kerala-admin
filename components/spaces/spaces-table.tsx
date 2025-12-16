@@ -10,6 +10,7 @@ import { ISpace } from '@/types';
 interface SpacesTableProps {
   spaces: ISpace[];
   onDelete?: (id: string) => void;
+  onToggleFeatured?: (id: string, isFeatured: boolean) => void;
 }
 
 const getTypeBadgeColor = (type: string): string => {
@@ -38,7 +39,11 @@ const getStatusBadge = (status: string) => {
   }
 };
 
-export function SpacesTable({ spaces, onDelete }: SpacesTableProps) {
+export function SpacesTable({
+  spaces,
+  onDelete,
+  onToggleFeatured,
+}: SpacesTableProps) {
   const router = useRouter();
 
   const handleEdit = (id: string) => {
