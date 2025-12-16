@@ -45,6 +45,22 @@ function SpacesContent() {
     }
   };
 
+  const handleToggleFeatured = async (id: string, isFeatured: boolean) => {
+    // Optimistic update
+    setSpaces(prev =>
+      prev.map(space =>
+        space._id === id || space.id === id ? { ...space, isFeatured } : space
+      )
+    );
+
+    try {
+      await api.put(`/spaces/${id}`, { isFeatured });
+    } catch (error) {
+      console.error('Failed to update featured status', error);
+      fetchSpaces(); // Revert changes
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="flex h-64 items-center justify-center">
@@ -80,7 +96,11 @@ function SpacesContent() {
 
       {/* Table */}
       <div className="overflow-hidden rounded-2xl border border-neutral-200">
-        <SpacesTable spaces={spaces} onDelete={handleDelete} />
+        <SpacesTable
+          spaces={spaces}
+          onDelete={handleDelete}
+          onToggleFeatured={handleToggleFeatured}
+        />
       </div>
     </div>
   );

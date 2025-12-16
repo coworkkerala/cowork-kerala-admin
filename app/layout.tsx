@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'CoWork Kerala - Admin Panel',
   description: 'Admin dashboard for CoWork Kerala coworking spaces',
+  icons: {
+    icon: '/icon.svg',
+  },
 };
 
 export default function RootLayout({

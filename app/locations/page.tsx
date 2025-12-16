@@ -16,6 +16,7 @@ interface Location {
   isActive: boolean;
   image?: string;
   description?: string;
+  priority?: number;
 }
 
 export default function LocationsPage() {
