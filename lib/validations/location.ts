@@ -5,6 +5,7 @@ export const locationSchema = z.object({
   description: z.string().optional(),
   image: z.string().optional(),
   isActive: z.boolean(),
+  priority: z.coerce.number().min(0).default(0),
 });
 
 export type LocationFormData = z.infer<typeof locationSchema>;

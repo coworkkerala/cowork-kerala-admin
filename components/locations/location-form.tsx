@@ -36,12 +36,14 @@ export function LocationForm({
     setValue,
     watch,
   } = useForm<LocationFormData>({
-    resolver: zodResolver(locationSchema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(locationSchema) as any,
     defaultValues: initialData || {
       name: '',
       description: '',
       image: '',
       isActive: true,
+      priority: 0,
     },
   });
 
@@ -114,6 +116,23 @@ export function LocationForm({
         />
         {errors.description && (
           <p className="text-sm text-red-500">{errors.description.message}</p>
+        )}
+      </div>
+
+      {/* Priority */}
+      <div className="space-y-2">
+        <label className="text-sm font-medium text-neutral-700">
+          Priority (Higher value = higher priority)
+        </label>
+        <Input
+          type="number"
+          min={0}
+          {...register('priority', { valueAsNumber: true })}
+          placeholder="0"
+          className="h-11"
+        />
+        {errors.priority && (
+          <p className="text-sm text-red-500">{errors.priority.message}</p>
         )}
       </div>
 

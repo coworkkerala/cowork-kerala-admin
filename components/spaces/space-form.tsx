@@ -60,6 +60,7 @@ export function SpaceForm({ initialData, isEditing = false }: SpaceFormProps) {
           amenities: [],
           images: [],
           status: 'pending',
+          priority: 0,
         },
     mode: 'onChange',
   });

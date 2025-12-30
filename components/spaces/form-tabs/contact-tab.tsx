@@ -24,7 +24,7 @@ export function ContactTab() {
         {/* Contact Person Name */}
         <div className="space-y-2">
           <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-            Contact Person Name <span className="text-destructive">*</span>
+            Contact Person Name
           </label>
           <Input
             placeholder="e.g. John Doe"
@@ -41,7 +41,7 @@ export function ContactTab() {
         {/* Phone Number */}
         <div className="space-y-2">
           <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-            Phone Number <span className="text-destructive">*</span>
+            Phone Number
           </label>
           <Input
             placeholder="+91 9876543210"
@@ -59,7 +59,7 @@ export function ContactTab() {
         {/* Email Address */}
         <div className="space-y-2">
           <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-            Email Address <span className="text-destructive">*</span>
+            Email Address
           </label>
           <Input
             placeholder="info@workhub.com"

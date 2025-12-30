@@ -7,8 +7,8 @@ export const pricingSchema = z.object({
 });
 
 export const locationSchema = z.object({
-  address: z.string().min(1, 'Address is required'),
-  pincode: z.string().min(1, 'Pincode is required'),
+  address: z.string().optional().or(z.literal('')),
+  pincode: z.string().optional().or(z.literal('')),
   landmark: z.string().optional(),
   latitude: z.coerce.number().optional(),
   longitude: z.coerce.number().optional(),
@@ -16,16 +16,20 @@ export const locationSchema = z.object({
 });
 
 export const contactSchema = z.object({
-  name: z.string().min(1, 'Contact name is required'),
-  email: z.string().email('Invalid email address'),
-  phone: z.string().min(10, 'Phone number must be at least 10 digits'),
+  name: z.string().optional().or(z.literal('')),
+  email: z.string().email('Invalid email address').optional().or(z.literal('')),
+  phone: z
+    .string()
+    .min(10, 'Phone number must be at least 10 digits')
+    .optional()
+    .or(z.literal('')),
 });
 
 export const spaceSchema = z.object({
-  spaceName: z.string().min(1, 'Space name is required'),
-  spaceType: z.string().min(1, 'Space type is required'),
-  city: z.string().min(1, 'City is required'),
-  spaceCategory: z.string().min(1, 'Space category is required'),
+  spaceName: z.string().optional().or(z.literal('')),
+  spaceType: z.string().optional().or(z.literal('')),
+  city: z.string().optional().or(z.literal('')),
+  spaceCategory: z.string().optional().or(z.literal('')),
   shortDescription: z.string().optional(),
   longDescription: z.string().optional(),
   website: z.string().url().optional().or(z.literal('')),
@@ -35,6 +39,8 @@ export const spaceSchema = z.object({
   contact: contactSchema.optional(),
   images: z.array(z.string().url()),
   status: z.enum(['active', 'inactive', 'pending']),
+  priority: z.coerce.number().int().min(0).max(100).default(0),
+  isFeatured: z.boolean().optional(),
 });
 
 export type SpaceFormData = z.infer<typeof spaceSchema>;

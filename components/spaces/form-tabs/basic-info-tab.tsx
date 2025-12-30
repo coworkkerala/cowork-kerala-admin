@@ -56,7 +56,7 @@ export function BasicInfoTab() {
             htmlFor="spaceName"
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           >
-            Space Name <span className="text-destructive">*</span>
+            Space Name
           </label>
           <Input
             id="spaceName"
@@ -77,7 +77,7 @@ export function BasicInfoTab() {
             htmlFor="spaceType"
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           >
-            Space Type <span className="text-destructive">*</span>
+            Space Type
           </label>
           <Select
             value={formValues.spaceType}
@@ -112,7 +112,7 @@ export function BasicInfoTab() {
             htmlFor="city"
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           >
-            City <span className="text-destructive">*</span>
+            City
           </label>
           <Select
             value={formValues.city}
@@ -158,7 +158,7 @@ export function BasicInfoTab() {
             htmlFor="spaceCategory"
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           >
-            Space Category <span className="text-destructive">*</span>
+            Space Category
           </label>
           <Select
             value={formValues.spaceCategory}
@@ -183,6 +183,33 @@ export function BasicInfoTab() {
           {errors.spaceCategory && (
             <p className="text-xs text-destructive">
               {errors.spaceCategory.message as string}
+            </p>
+          )}
+        </div>
+
+        {/* Priority */}
+        <div className="space-y-2">
+          <label
+            htmlFor="priority"
+            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          >
+            Priority
+          </label>
+          <Input
+            id="priority"
+            type="number"
+            min={0}
+            max={100}
+            placeholder="0"
+            className={errors.priority ? 'border-destructive' : ''}
+            {...register('priority', { valueAsNumber: true })}
+          />
+          <p className="text-[0.8rem] text-muted-foreground">
+            Priority (0-100). Higher numbers will appear first in the listing.
+          </p>
+          {errors.priority && (
+            <p className="text-xs text-destructive">
+              {errors.priority.message as string}
             </p>
           )}
         </div>

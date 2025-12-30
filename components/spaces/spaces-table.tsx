@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Pencil, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
@@ -64,7 +65,9 @@ export function SpacesTable({
             <th className="px-4 py-3">Space</th>
             <th className="px-4 py-3">Type</th>
             <th className="px-4 py-3">Location</th>
+            <th className="px-4 py-3 text-center">Priority</th>
             <th className="px-4 py-3">Price</th>
+            <th className="px-4 py-3">Featured</th>
             <th className="px-4 py-3">Status</th>
             <th className="px-4 py-3 text-right">Actions</th>
           </tr>
@@ -81,31 +84,36 @@ export function SpacesTable({
                     {space.images && space.images[0] ? (
                       <Image
                         src={space.images[0]}
-                        alt={space.spaceName}
+                        alt={space.spaceName || 'Space Image'}
                         fill
                         className="object-cover"
                       />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center bg-emerald-50 text-xs font-semibold text-emerald-600">
-                        {space.spaceName?.substring(0, 2).toUpperCase()}
+                        {space.spaceName?.substring(0, 2).toUpperCase() || 'SP'}
                       </div>
                     )}
                   </div>
                   <span className="font-medium text-neutral-900">
-                    {space.spaceName}
+                    {space.spaceName || 'Unnamed Space'}
                   </span>
                 </div>
               </td>
               <td className="px-4 py-3">
                 <Badge
                   variant="secondary"
-                  className={getTypeBadgeColor(space.spaceType)}
+                  className={getTypeBadgeColor(space.spaceType || '')}
                 >
-                  {space.spaceType}
+                  {space.spaceType || 'Unknown Type'}
                 </Badge>
               </td>
               <td className="px-4 py-3 text-neutral-600">
-                {typeof space.city === 'object' ? space.city?.name : space.city}
+                {typeof space.city === 'object'
+                  ? space.city?.name
+                  : space.city || 'Unknown City'}
+              </td>
+              <td className="px-4 py-3 text-center text-neutral-600">
+                {space.priority ?? 0}
               </td>
               <td className="px-4 py-3 text-neutral-600">
                 {space.pricing?.hotDesk ? (
@@ -113,6 +121,18 @@ export function SpacesTable({
                 ) : (
                   <span className="text-neutral-400">—</span>
                 )}
+              </td>
+              <td className="px-4 py-3">
+                <Checkbox
+                  checked={space.isFeatured || false}
+                  onCheckedChange={checked =>
+                    onToggleFeatured?.(
+                      space._id || (space.id as string),
+                      checked as boolean
+                    )
+                  }
+                  aria-label="Toggle featured"
+                />
               </td>
               <td className="px-4 py-3">
                 <Badge
@@ -141,7 +161,7 @@ export function SpacesTable({
                     onClick={() =>
                       handleDelete(
                         space._id || (space.id as string),
-                        space.spaceName
+                        space.spaceName || 'this space'
                       )
                     }
                   >

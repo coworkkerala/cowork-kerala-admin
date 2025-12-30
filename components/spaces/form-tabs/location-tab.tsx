@@ -48,7 +48,7 @@ export function LocationTab() {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                Complete Address <span className="text-destructive">*</span>
+                Complete Address
               </label>
               <Textarea
                 placeholder="Building Name, Street Number, Area, City..."
@@ -74,7 +74,7 @@ export function LocationTab() {
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium leading-none">
-                  Pin Code <span className="text-destructive">*</span>
+                  Pin Code
                 </label>
                 <Input
                   placeholder="682001"
